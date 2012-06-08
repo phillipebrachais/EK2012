@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Ranking" android:id="@+id/itemRanking" android:visible="true" android:enabled="true"></item>
+    <item android:title="Predictions" android:id="@+id/itemPredictions" android:visible="true" android:enabled="true"></item>
+    
+</menu>
