@@ -4,5 +4,8 @@
     <color name="res_color_background">#FFFFFF</color>
     <color name="res_color_text_header">#000000</color>
     <color name="res_color_text_content">#000000</color>
-    <string name="res_text_header">EK 2012 - page 1</string>
+    <string name="res_url_ranking">http://www.sitemasters.be/ek2012/json.php?type=ranking</string>
+    <string name="res_url_predictions">http://www.sitemasters.be/ek2012/json.php?type=predictions</string>
+    <string name="res_text_header_ranking">Ranking</string>
+    <string name="res_text_header_predictions">Predictions</string>
 </resources>

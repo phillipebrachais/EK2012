@@ -41,7 +41,10 @@ public final class R {
     }
     public static final class string {
         public static final int res_text_applicationname=0x7f050000;
-        public static final int res_text_header=0x7f050001;
+        public static final int res_text_header_predictions=0x7f050004;
+        public static final int res_text_header_ranking=0x7f050003;
+        public static final int res_url_predictions=0x7f050002;
+        public static final int res_url_ranking=0x7f050001;
     }
     public static final class style {
         public static final int Animations=0x7f070001;

@@ -8,18 +8,18 @@
 
     <application android:icon="@drawable/icon" android:label="@string/res_text_applicationname">
         <activity android:name=".EK2012PredictionsActivity"
-                  android:label="@string/res_text_applicationname">
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name="SplashScreen">
+        <activity android:name="SplashScreen"
+        			android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"></action>
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
-
     </application>
 </manifest>

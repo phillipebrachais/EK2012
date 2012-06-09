@@ -30,6 +30,8 @@ public class EK2012PredictionsActivity extends Activity {
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.main);
+	        
+	        showContent(R.string.res_url_ranking);
 	    }
 	    
 	    @Override
@@ -43,10 +45,10 @@ public class EK2012PredictionsActivity extends Activity {
 		public boolean onOptionsItemSelected(MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.itemRanking:
-				showRanking();
+				showContent(R.string.res_url_ranking);
 				break;
 			case R.id.itemPredictions:
-				showPredictions();
+				showContent(R.string.res_url_predictions);
 				break;
 			default:
 				break;
@@ -54,7 +56,53 @@ public class EK2012PredictionsActivity extends Activity {
 			return true;
 		}
 	    
-	    public void showRanking() {
+	    public void showHeader(int option){
+	    	TextView headerView = (TextView) findViewById(R.id.Header);
+	    	
+	    	switch (option) {
+				case R.string.res_url_ranking:
+					headerView.setText(getString(R.string.res_text_header_ranking));
+					break;
+				case R.string.res_url_predictions:
+					headerView.setText(getString(R.string.res_text_header_predictions));
+					break;
+				default:
+					break;
+	    	}
+	    }
+	    
+	    public void showDetails(int option, JSONArray data) throws JSONException{
+            TextView contentView = (TextView) findViewById(R.id.Content);
+            contentView.setText("");
+            
+            for (int i = 0; i < data.length(); i++) {
+            	JSONObject row = data.getJSONObject(i);
+            	switch (option) {
+     				case R.string.res_url_ranking:
+     					contentView.append(row.getString("Name"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("Score"));
+    	            	contentView.append("\n"); 
+     					break;
+     				case R.string.res_url_predictions:
+     					contentView.append(row.getString("user_nicename"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("HomeTeam"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("AwayTeam"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("home_goals"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("away_goals"));
+    	            	contentView.append("\n"); 
+     					break;
+     				default:
+     					break;
+            	}
+            }
+	    }
+	    
+	    public void showContent(int option){
 	    	BufferedReader in = null;
 	        try 
 	        {
@@ -62,7 +110,7 @@ public class EK2012PredictionsActivity extends Activity {
 	            client.getParams().setParameter(CoreProtocolPNames.USER_AGENT, "android");
 	            HttpGet request = new HttpGet();
 	            request.setHeader("Content-Type", "text/plain; charset=utf-8");
-	            request.setURI(new URI("http://www.sitemasters.be/ek2012/json.php?type=ranking"));
+	            request.setURI(new URI(getString(option)));
 	            HttpResponse response = client.execute(request);
 	            in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
@@ -76,96 +124,10 @@ public class EK2012PredictionsActivity extends Activity {
 	            in.close();
 	           
 	            JSONArray data = new JSONArray(sb.toString());
-	            
-	            TextView contentView = (TextView) findViewById(R.id.Content);
-	            TextView headerView = (TextView) findViewById(R.id.Header);
-	            contentView.setText("");
-	            headerView.setText("Ranking");
-	            
-	            for (int i = 0; i < data.length(); i++) {
-	            	JSONObject row = data.getJSONObject(i);
-	            	contentView.append(row.getString("Name"));
-	            	contentView.append(" - ");
-	            	contentView.append(row.getString("Score"));
-	            	contentView.append("\n"); 
-	            }
-	            
-	            
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        catch (Exception e)
-	    	{
-	    		// this is the line of code that sends a real error message to the log
-	    		Log.e("ERROR", "ERROR IN CODE: " + e.toString());
-	     
-	    		// this is the line that prints out the location in
-	    		// the code where the error occurred.
-	    		e.printStackTrace();
-	    	}
-	        finally 
-	        {
-	            
-	        }
-	    }
-	    
-	    public void showPredictions() {
-	    	BufferedReader in = null;
-	        try 
-	        {
-	            HttpClient client = new DefaultHttpClient();
-	            client.getParams().setParameter(CoreProtocolPNames.USER_AGENT, "android");
-	            HttpGet request = new HttpGet();
-	            request.setHeader("Content-Type", "text/plain; charset=utf-8");
-	            request.setURI(new URI("http://www.sitemasters.be/ek2012/json.php?type=predictions"));
-	            HttpResponse response = client.execute(request);
-	            in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
-	            StringBuilder sb = new StringBuilder();
-	            String line = "";
-
-	            while ((line = in.readLine()) != null) 
-	            {
-	                sb.append(line + "\n");
-	            }
-	            in.close();
-	            
-	            TextView contentView = (TextView) findViewById(R.id.Content);
-	            TextView headerView = (TextView) findViewById(R.id.Header);
-	            contentView.setText("");
-	            headerView.setText("Predictions");
 	           
-	            if (sb.toString() == "[]\n") {
-	            	contentView.setText("Predictions are only shown when the match is in progress.");
-	            }
-	            else
-	            {
-		            JSONArray data = new JSONArray(sb.toString());
-
-	            	for (int i = 0; i < data.length(); i++) {
-	                	JSONObject row = data.getJSONObject(i);
-	                	contentView.append(row.getString("user_nicename"));
-	                	contentView.append(" - ");
-	                	contentView.append(row.getString("HomeTeam"));
-	                	contentView.append(" - ");
-	                	contentView.append(row.getString("AwayTeam"));
-	                	contentView.append(" - ");
-	                	contentView.append(row.getString("home_goals"));
-	                	contentView.append(" - ");
-	                	contentView.append(row.getString("away_goals"));
-	                	contentView.append("\n"); 
-	                }
-	            }   
+	            showHeader(option);
+	            showDetails(option, data);
+	            
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
