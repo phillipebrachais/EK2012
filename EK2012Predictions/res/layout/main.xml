@@ -19,7 +19,7 @@
             android:paddingRight="8dip"
             android:paddingTop="8dip"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/res_color_text_header" >
+            android:textColor="@color/res_color_text_header">
         </TextView>
 
         <TextView

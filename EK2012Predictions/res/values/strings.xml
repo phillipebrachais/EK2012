@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="res_text_applicationname">EK 2012</string>
-    <color name="res_color_background">#FFFFFF</color>
-    <color name="res_color_text_header">#000000</color>
+    <color name="res_color_background">#000000</color>
+    <color name="res_color_background_splash">#FFFFFF</color>
+    <color name="res_color_text_header">#BEBEBE</color>
     <color name="res_color_text_content">#000000</color>
     <color name="res_color_bg_alternatingEven">#000000</color>
     <color name="res_color_bg_alternatingOdd">#FFFFFF</color>

@@ -18,13 +18,13 @@ import org.json.JSONObject;
 
 import EK2012.Predictions.R;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -91,6 +91,23 @@ public class EK2012PredictionsActivity extends Activity {
             TextView contentView = (TextView) findViewById(R.id.Content);
             contentView.setText("");
             
+            clearTableRows();
+            
+            switch (option) {
+				case R.string.res_url_ranking:
+					addRankingHeaderRow();
+					break;
+				case R.string.res_url_predictions:
+					addPredictionsHeaderRow(data.getJSONObject(0).getString("HomeTeam"), data.getJSONObject(0).getString("AwayTeam"));
+					break;
+				case R.string.res_url_matches:
+					break;
+				case R.string.res_url_news:
+					break;
+				default:
+					break;
+            }
+            
             for (int i = 0; i < data.length(); i++) {
             	JSONObject row = data.getJSONObject(i);
             	switch (option) {
@@ -98,38 +115,13 @@ public class EK2012PredictionsActivity extends Activity {
      					addRankingRow(row, i); 
      					break;
      				case R.string.res_url_predictions:
-     					contentView.append(row.getString("user_nicename"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("HomeTeam"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("AwayTeam"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("home_goals"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("away_goals"));
-    	            	contentView.append("\n"); 
+     					addPredictionsRow(row, i);
      					break;
      				case R.string.res_url_matches:
-     					contentView.append(row.getString("HomeTeam"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("AwayTeam"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("kickoff"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("home_goals"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("away_goals"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("Ended"));
-    	            	contentView.append("\n"); 
+     					addMatchesRow(row, i);
      					break;
      				case R.string.res_url_news:
-     					contentView.append(row.getString("post_date"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("post_title"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("post_content"));
-    	            	contentView.append("\n"); 
+     					addNewsRow(row);
      					break;
      				default:
      					break;
@@ -191,6 +183,31 @@ public class EK2012PredictionsActivity extends Activity {
 	        }
 	    }
 	    
+	    public void addRankingHeaderRow() {
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
+			
+			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText("Position");
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText("User");
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.RIGHT);
+			tableColumn.setText("Score");
+			tableRow.addView(tableColumn);
+			
+			table.addView(tableRow);
+	    }
+	    
 	    public void addRankingRow(JSONObject row, int rowCount) throws JSONException{
 	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
 			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
@@ -206,6 +223,12 @@ public class EK2012PredictionsActivity extends Activity {
 			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
 			tableColumn.setPadding(20, 5, 20, 5);
 			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(String.valueOf(rowCount + 1));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
 			tableColumn.setText(row.getString("Name"));
 			tableRow.addView(tableColumn);
 			
@@ -216,5 +239,134 @@ public class EK2012PredictionsActivity extends Activity {
 			tableRow.addView(tableColumn);
 			
 			table.addView(tableRow);
+	    }
+	    
+	    public void addMatchesRow(JSONObject row, int rowCount) throws JSONException{
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
+			
+			if ((rowCount % 2) == 0) {
+				tableRow.setBackgroundColor(R.color.res_color_bg_alternatingEven);
+			}
+
+			else {
+				tableRow.setBackgroundColor(R.color.res_color_bg_alternatingOdd);
+			}
+			
+			ImageView ivHome = new ImageView(this);
+			ivHome.setBackgroundResource(getResources().getIdentifier("drawable/" + row.getString("HomeTeam").toLowerCase(), "drawable", getPackageName()));
+			
+			ImageView ivAway = new ImageView(this);
+			ivAway.setBackgroundResource(getResources().getIdentifier("drawable/" + row.getString("AwayTeam").toLowerCase(), "drawable", getPackageName()));
+			
+			tableRow.addView(ivHome);
+			
+			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("home_goals"));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.RIGHT);
+			tableColumn.setText(row.getString("away_goals"));
+			tableRow.addView(tableColumn);
+			
+			tableRow.addView(ivAway);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("kickoff"));
+			tableRow.addView(tableColumn);
+
+			table.addView(tableRow);
+	    }
+	    
+	    public void addPredictionsHeaderRow(String homeCountry, String awayCountry) {
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
+			
+			ImageView ivHome = new ImageView(this);
+			ivHome.setBackgroundResource(getResources().getIdentifier("drawable/" + homeCountry.toLowerCase(), "drawable", getPackageName()));
+			
+			ImageView ivAway = new ImageView(this);
+			ivAway.setBackgroundResource(getResources().getIdentifier("drawable/" + awayCountry.toLowerCase(), "drawable", getPackageName()));
+			
+			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText("User");
+			tableRow.addView(tableColumn);
+			
+			tableRow.addView(ivHome);
+			
+			tableRow.addView(ivAway);
+			
+			table.addView(tableRow);
+	    }
+	    
+	    public void addPredictionsRow(JSONObject row, int rowCount) throws JSONException{
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
+			
+			if ((rowCount % 2) == 0) {
+				tableRow.setBackgroundColor(R.color.res_color_bg_alternatingEven);
+			}
+
+			else {
+				tableRow.setBackgroundColor(R.color.res_color_bg_alternatingOdd);
+			}
+			
+			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("user_nicename"));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.RIGHT);
+			tableColumn.setText(row.getString("home_goals"));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("away_goals"));
+			tableRow.addView(tableColumn);
+			
+			table.addView(tableRow);
+	    }
+	    
+	    public void addNewsRow(JSONObject row) throws JSONException{
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
+			
+			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("post_date"));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.RIGHT);
+			tableColumn.setText(row.getString("post_title"));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("post_content"));
+			tableRow.addView(tableColumn);
+			
+			table.addView(tableRow);
+	    }
+	    
+	    public void clearTableRows() {
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+	    	table.removeAllViews();
 	    }
 	}

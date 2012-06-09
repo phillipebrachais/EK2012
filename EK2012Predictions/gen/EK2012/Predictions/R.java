@@ -16,14 +16,30 @@ public final class R {
     }
     public static final class color {
         public static final int res_color_background=0x7f060000;
-        public static final int res_color_bg_alternatingEven=0x7f060003;
-        public static final int res_color_bg_alternatingOdd=0x7f060004;
-        public static final int res_color_text_content=0x7f060002;
-        public static final int res_color_text_header=0x7f060001;
+        public static final int res_color_background_splash=0x7f060001;
+        public static final int res_color_bg_alternatingEven=0x7f060004;
+        public static final int res_color_bg_alternatingOdd=0x7f060005;
+        public static final int res_color_text_content=0x7f060003;
+        public static final int res_color_text_header=0x7f060002;
     }
     public static final class drawable {
-        public static final int ek2012logo=0x7f020000;
-        public static final int icon=0x7f020001;
+        public static final int croatia=0x7f020000;
+        public static final int czechrepublic=0x7f020001;
+        public static final int denmark=0x7f020002;
+        public static final int ek2012logo=0x7f020003;
+        public static final int england=0x7f020004;
+        public static final int france=0x7f020005;
+        public static final int germany=0x7f020006;
+        public static final int greece=0x7f020007;
+        public static final int ireland=0x7f020008;
+        public static final int italy=0x7f020009;
+        public static final int netherlands=0x7f02000a;
+        public static final int poland=0x7f02000b;
+        public static final int portugal=0x7f02000c;
+        public static final int russia=0x7f02000d;
+        public static final int spain=0x7f02000e;
+        public static final int sweden=0x7f02000f;
+        public static final int ukraine=0x7f020010;
     }
     public static final class id {
         public static final int Content=0x7f090002;
