@@ -18,11 +18,15 @@ import org.json.JSONObject;
 
 import EK2012.Predictions.R;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class EK2012PredictionsActivity extends Activity {
@@ -50,6 +54,12 @@ public class EK2012PredictionsActivity extends Activity {
 			case R.id.itemPredictions:
 				showContent(R.string.res_url_predictions);
 				break;
+			case R.id.itemMatches:
+				showContent(R.string.res_url_matches);
+				break;
+			case R.id.itemNews:
+				showContent(R.string.res_url_news);
+				break;
 			default:
 				break;
 			}
@@ -66,6 +76,12 @@ public class EK2012PredictionsActivity extends Activity {
 				case R.string.res_url_predictions:
 					headerView.setText(getString(R.string.res_text_header_predictions));
 					break;
+				case R.string.res_url_matches:
+					headerView.setText(getString(R.string.res_text_header_matches));
+					break;
+				case R.string.res_url_news:
+					headerView.setText(getString(R.string.res_text_header_news));
+					break;
 				default:
 					break;
 	    	}
@@ -79,10 +95,7 @@ public class EK2012PredictionsActivity extends Activity {
             	JSONObject row = data.getJSONObject(i);
             	switch (option) {
      				case R.string.res_url_ranking:
-     					contentView.append(row.getString("Name"));
-    	            	contentView.append(" - ");
-    	            	contentView.append(row.getString("Score"));
-    	            	contentView.append("\n"); 
+     					addRankingRow(row, i); 
      					break;
      				case R.string.res_url_predictions:
      					contentView.append(row.getString("user_nicename"));
@@ -94,6 +107,28 @@ public class EK2012PredictionsActivity extends Activity {
     	            	contentView.append(row.getString("home_goals"));
     	            	contentView.append(" - ");
     	            	contentView.append(row.getString("away_goals"));
+    	            	contentView.append("\n"); 
+     					break;
+     				case R.string.res_url_matches:
+     					contentView.append(row.getString("HomeTeam"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("AwayTeam"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("kickoff"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("home_goals"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("away_goals"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("Ended"));
+    	            	contentView.append("\n"); 
+     					break;
+     				case R.string.res_url_news:
+     					contentView.append(row.getString("post_date"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("post_title"));
+    	            	contentView.append(" - ");
+    	            	contentView.append(row.getString("post_content"));
     	            	contentView.append("\n"); 
      					break;
      				default:
@@ -154,5 +189,32 @@ public class EK2012PredictionsActivity extends Activity {
 	        {
 	            
 	        }
+	    }
+	    
+	    public void addRankingRow(JSONObject row, int rowCount) throws JSONException{
+	    	TableLayout table = (TableLayout) findViewById(R.id.ContentTable);
+			TableRow tableRow = new TableRow(EK2012PredictionsActivity.this);
+			
+			if ((rowCount % 2) == 0) {
+				tableRow.setBackgroundColor(R.color.res_color_bg_alternatingEven);
+			}
+
+			else {
+				tableRow.setBackgroundColor(R.color.res_color_bg_alternatingOdd);
+			}
+			
+			TextView tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.LEFT);
+			tableColumn.setText(row.getString("Name"));
+			tableRow.addView(tableColumn);
+			
+			tableColumn = new TextView(EK2012PredictionsActivity.this);
+			tableColumn.setPadding(20, 5, 20, 5);
+			tableColumn.setGravity(Gravity.RIGHT);
+			tableColumn.setText(row.getString("Score"));
+			tableRow.addView(tableColumn);
+			
+			table.addView(tableRow);
 	    }
 	}

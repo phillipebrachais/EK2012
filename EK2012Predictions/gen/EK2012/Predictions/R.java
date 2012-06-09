@@ -16,6 +16,8 @@ public final class R {
     }
     public static final class color {
         public static final int res_color_background=0x7f060000;
+        public static final int res_color_bg_alternatingEven=0x7f060003;
+        public static final int res_color_bg_alternatingOdd=0x7f060004;
         public static final int res_color_text_content=0x7f060002;
         public static final int res_color_text_header=0x7f060001;
     }
@@ -25,12 +27,15 @@ public final class R {
     }
     public static final class id {
         public static final int Content=0x7f090002;
+        public static final int ContentTable=0x7f090004;
         public static final int Header=0x7f090001;
         public static final int LinearLayout01=0x7f090000;
         public static final int TextView02=0x7f090003;
-        public static final int imageView1=0x7f090004;
-        public static final int itemPredictions=0x7f090006;
-        public static final int itemRanking=0x7f090005;
+        public static final int imageView1=0x7f090005;
+        public static final int itemMatches=0x7f090008;
+        public static final int itemNews=0x7f090009;
+        public static final int itemPredictions=0x7f090007;
+        public static final int itemRanking=0x7f090006;
     }
     public static final class layout {
         public static final int main=0x7f030000;
@@ -41,8 +46,12 @@ public final class R {
     }
     public static final class string {
         public static final int res_text_applicationname=0x7f050000;
-        public static final int res_text_header_predictions=0x7f050004;
-        public static final int res_text_header_ranking=0x7f050003;
+        public static final int res_text_header_matches=0x7f050007;
+        public static final int res_text_header_news=0x7f050008;
+        public static final int res_text_header_predictions=0x7f050006;
+        public static final int res_text_header_ranking=0x7f050005;
+        public static final int res_url_matches=0x7f050003;
+        public static final int res_url_news=0x7f050004;
         public static final int res_url_predictions=0x7f050002;
         public static final int res_url_ranking=0x7f050001;
     }

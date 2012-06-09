@@ -21,7 +21,7 @@ public class SplashScreen extends Activity {
             public void run(){
                 try {
                     synchronized(this){
-                        wait(5000);
+                        wait(2500);
                     }
                 }
                 catch(InterruptedException ex){                    
