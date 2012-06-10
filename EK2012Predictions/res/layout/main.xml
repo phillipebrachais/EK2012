@@ -10,7 +10,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
         <TextView
             android:id="@+id/Header"
             android:layout_width="wrap_content"
@@ -19,9 +18,13 @@
             android:paddingRight="8dip"
             android:paddingTop="8dip"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
             android:textColor="@color/res_color_text_header">
         </TextView>
-
+        <View
+			 android:layout_width="fill_parent"
+			 android:layout_height="1dp"
+			 android:background="@color/res_color_text_header" />
         <TextView
             android:id="@+id/Content"
             android:layout_width="wrap_content"
@@ -30,13 +33,11 @@
             android:text="@+id/TextView02"
             android:textColor="@color/res_color_text_content" >
         </TextView>
-        
         <TableLayout
             android:id="@+id/ContentTable"
 		    android:layout_width="fill_parent"
 		    android:layout_height="fill_parent"
-		    android:stretchColumns="1">
+		    android:stretchColumns="*">
 		</TableLayout>
-
     </LinearLayout>
 </ScrollView>

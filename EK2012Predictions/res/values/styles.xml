@@ -13,5 +13,13 @@
     <style name="Animations.SplashScreen">
         <item name="android:windowEnterAnimation">@anim/appear</item>
         <item name="android:windowExitAnimation">@anim/disappear</item> 
-    </style>   
+    </style>
+    <style name="newsTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20px</item>
+    </style>
+    <style name="newsPostDate">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">14px</item>
+    </style>      
 </resources>
