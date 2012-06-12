@@ -31,8 +31,7 @@ public class SplashScreen extends Activity {
                 
                 Intent intent = new Intent();
                 intent.setClass(sPlashScreen, EK2012PredictionsActivity.class);
-                startActivity(intent);
-                stop();                    
+                startActivity(intent);                    
             }
         };
         

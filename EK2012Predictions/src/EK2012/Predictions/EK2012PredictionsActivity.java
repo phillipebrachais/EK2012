@@ -21,6 +21,11 @@ import org.json.JSONObject;
 
 import EK2012.Predictions.R;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -28,6 +33,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -40,6 +47,10 @@ public class EK2012PredictionsActivity extends Activity {
 	        setContentView(R.layout.main);
 	        
 	        showContent(R.string.res_url_ranking);
+	        
+	        initiateImageClicks();
+	        
+	        /*initiateNotificationModule();*/
 	    }
 	    
 	    @Override
@@ -345,5 +356,57 @@ public class EK2012PredictionsActivity extends Activity {
 			Date kickoffDate = dateFormat.parse(input);
 			kickoffDate.setHours(kickoffDate.getHours() + 2);
 			return (String) DateFormat.format("dd-MM-yyyy kk:mm", kickoffDate);
+	    }
+	    
+	    /*public void initiateNotificationModule(){
+	    	String ns = Context.NOTIFICATION_SERVICE;
+	    	NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
+	    	
+	    	int icon = R.drawable.ek2012icon;
+	    	CharSequence tickerText = "Upcoming match";
+	    	long when = System.currentTimeMillis();
+
+	    	Notification notification = new Notification(icon, tickerText, when);
+	    	
+	    	Context context = getApplicationContext();
+	    	CharSequence contentTitle = "Upcoming match - yihaa";
+	    	CharSequence contentText = "2 great teams are competing :-)";
+	    	Intent notificationIntent = new Intent(this, EK2012PredictionsActivity.class);
+	    	PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+	    	notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
+
+	    	mNotificationManager.notify(1, notification);
+	    }*/
+	    
+	    public void initiateImageClicks(){
+	    	ImageView imgRanking = (ImageView) findViewById(R.id.imageRanking);
+	    	ImageView imgNews = (ImageView) findViewById(R.id.imageNews);
+	    	ImageView imgMatches = (ImageView) findViewById(R.id.imageMatches);
+	    	ImageView imgPredictions = (ImageView) findViewById(R.id.imagePredictions);
+	    	
+	    	imgRanking.setOnClickListener(new OnClickListener() {
+	    	    public void onClick(View v) {
+	    	    	showContent(R.string.res_url_ranking);
+	    	    }
+	    	});
+	    	
+	    	imgNews.setOnClickListener(new OnClickListener() {
+	    	    public void onClick(View v) {
+	    	    	showContent(R.string.res_url_news);
+	    	    }
+	    	});
+	    	
+	    	imgMatches.setOnClickListener(new OnClickListener() {
+	    	    public void onClick(View v) {
+	    	    	showContent(R.string.res_url_matches);
+	    	    }
+	    	});
+	    	
+	    	imgPredictions.setOnClickListener(new OnClickListener() {
+	    	    public void onClick(View v) {
+	    	    	showContent(R.string.res_url_predictions);
+	    	    }
+	    	});
 	    }
 	}

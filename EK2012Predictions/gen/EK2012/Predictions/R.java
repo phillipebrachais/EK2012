@@ -33,26 +33,36 @@ public final class R {
         public static final int germany=0x7f020007;
         public static final int greece=0x7f020008;
         public static final int italy=0x7f020009;
-        public static final int netherlands=0x7f02000a;
-        public static final int poland=0x7f02000b;
-        public static final int portugal=0x7f02000c;
-        public static final int republicofireland=0x7f02000d;
-        public static final int russia=0x7f02000e;
-        public static final int spain=0x7f02000f;
-        public static final int sweden=0x7f020010;
-        public static final int ukraine=0x7f020011;
+        public static final int matches=0x7f02000a;
+        public static final int netherlands=0x7f02000b;
+        public static final int news=0x7f02000c;
+        public static final int poland=0x7f02000d;
+        public static final int portugal=0x7f02000e;
+        public static final int predictions=0x7f02000f;
+        public static final int ranking=0x7f020010;
+        public static final int republicofireland=0x7f020011;
+        public static final int russia=0x7f020012;
+        public static final int spain=0x7f020013;
+        public static final int sweden=0x7f020014;
+        public static final int ukraine=0x7f020015;
     }
     public static final class id {
-        public static final int Content=0x7f090002;
-        public static final int ContentTable=0x7f090004;
-        public static final int Header=0x7f090001;
+        public static final int Content=0x7f090008;
+        public static final int ContentTable=0x7f09000a;
+        public static final int Header=0x7f090002;
         public static final int LinearLayout01=0x7f090000;
-        public static final int TextView02=0x7f090003;
-        public static final int imageView1=0x7f090005;
-        public static final int itemMatches=0x7f090008;
-        public static final int itemNews=0x7f090009;
-        public static final int itemPredictions=0x7f090007;
-        public static final int itemRanking=0x7f090006;
+        public static final int LinearLayout02=0x7f090001;
+        public static final int LinearLayout03=0x7f090003;
+        public static final int TextView02=0x7f090009;
+        public static final int imageMatches=0x7f090007;
+        public static final int imageNews=0x7f090004;
+        public static final int imagePredictions=0x7f090006;
+        public static final int imageRanking=0x7f090005;
+        public static final int imageView1=0x7f09000b;
+        public static final int itemMatches=0x7f09000e;
+        public static final int itemNews=0x7f09000f;
+        public static final int itemPredictions=0x7f09000d;
+        public static final int itemRanking=0x7f09000c;
     }
     public static final class layout {
         public static final int main=0x7f030000;
